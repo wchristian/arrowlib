@@ -14,8 +14,6 @@ The goal of this library is to create simple yet versatile interfaces to draw ar
 
 ## Initialization
 
-_control.lua_
-
 ```lua
 local arrow = require("__arrowlib__/arrow")
 
@@ -42,6 +40,7 @@ end)
 Initializes the arrow library, which is required to be done from the mod using the library since the library utilizes the mod's `global`
 
 **Parameters**
+
 (arguments which are striked through are not yet implemented)
 
 | Argument                 | Default | Accepted values                                                                                       | Description                                                                                           |
@@ -90,6 +89,7 @@ end
 Creates a new arrow
 
 **Parameters**
+
 (arguments which are striked through are not yet implemented)
 
 | Argument                | Accepted values                                                                                       | Description                                                                                                     |
@@ -107,6 +107,7 @@ Creates a new arrow
 | ~~`render_tag_icon`~~   | Bool                                                                                                  | Render the tag icon on the world when pointing from/to a chart tag, defaults to `false`                         |
 
 \*) Position data = union{[LuaEntity](https://lua-api.factorio.com/latest/classes/LuaEntity.html), [LuaCustomChartTag](https://lua-api.factorio.com/latest/classes/LuaCustomChartTag.html), [LuaTile](https://lua-api.factorio.com/latest/classes/LuaTile.html), [BoundingBox](https://lua-api.factorio.com/latest/concepts.html#BoundingBox) [MapPosition](https://lua-api.factorio.com/latest/concepts.html#MapPosition)}
+
 \*\*) orientation = union{`arrow.defines.source_direction.from_top`, `arrow.defines.source_direction.from_left`, `arrow.defines.source_direction.from_bottom`, `arrow.defines.source_direction.from_right`}
 
 ---
