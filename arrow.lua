@@ -96,12 +96,6 @@ arrow.create = function(data)
     -- This is where the controller takes over
     local id = controller.create(data)
 
-    -- if data.source and data.target then
-    --     game.print("Creating for " .. data.source.name .. " with typeof: " .. type(data.source))
-    -- else
-    --     game.print("Not creating anything")
-    -- end
-
     return id
 end
 

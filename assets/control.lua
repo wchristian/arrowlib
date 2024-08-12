@@ -36,3 +36,7 @@ end)
 script.on_init(function()
     init_arrow()
 end)
+
+script.on_event(defines.events.on_tick, function(e)
+    arrow.tick_update()
+end)

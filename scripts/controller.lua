@@ -7,10 +7,6 @@ local view = require("__arrowlib__/scripts/view")
 
 local controller = {}
 
-------------------------------------------------------------------------------------------
--- Helper functions
-------------------------------------------------------------------------------------------
-
 local get_pt = function(from, to)
     local from_norm = position.get_normalized(from)
     local to_norm = position.get_normalized(to)
@@ -89,7 +85,7 @@ local calculate_prop = function(data)
     end
 
     -- Add generic info to prop
-    local srf = data.surface or data.target.surface or data.source.surface
+    local srf = data.surface or data.target.surface or data.source.surface -- TODO: data.surface should only be used if not data.source
     if type(srf) == "table" then
         prop.surface = srf
     else
