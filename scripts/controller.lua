@@ -117,13 +117,19 @@ controller.create = function(data)
 end
 
 controller.remove = function(id)
+    -- Get the data
     local v = model.get(id)
+    if not v then
+        -- Early exit if we tried to retrieve an ID that does not exist
+        return false
+    end
 
     view.destroy(v.arrow_id)
     view.destroy(v.box_id)
     model.remove(id)
 
     -- Get the model again and check if it returns nil or not
+    -- If it is not nil then we did something wrong in model.remove(id)
     v = model.get(id)
     return v == nil
 end
@@ -142,6 +148,14 @@ controller.remove_all = function()
         success = success and controller.remove(id)
     end
     return success
+end
+
+controller.get_distance = function(id)
+    local v = model.get(id)
+    if not v then
+        return
+    end
+    return v.prop.distance
 end
 
 controller.tick_update = function()

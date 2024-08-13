@@ -115,6 +115,18 @@ arrow.tick_update = function()
     controller.tick_update()
 end
 
+arrow.get_distance = function(id)
+    if not id then
+        warning_if("Key `id` missing")
+        return
+    end
+    if not tostring("id") then
+        warning_if("Key `id` expected string, got " .. type(id))
+        return
+    end
+    return controller.get_distance(id)
+end
+
 arrow.init = function(data)
     -- Initialize global array
     if not global.arrowlib then
