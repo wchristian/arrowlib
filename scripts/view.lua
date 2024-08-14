@@ -6,8 +6,17 @@ local view = {}
 
 local get_arg = function(prop)
 
+    -- Overwrite prop.color if the sprite is not allowed for coloring
+    for _, s in pairs(const.arrow.disallow_coloring) do
+        if prop.sprite == s then
+            prop.color = nil
+            break
+        end
+    end
     local arg = {
-        sprite = "utility/alert_arrow",
+        -- sprite = "utility/alert_arrow",
+        sprite = prop.sprite,
+        tint = prop.color,
         surface = prop.surface,
         time_to_live = prop.time_to_live,
         x_scale = prop.scale,

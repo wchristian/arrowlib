@@ -1,4 +1,6 @@
 -- This is where we keep track of all the arrows and the data under them
+local const = require("__arrowlib__/lib/const")
+
 local model = {}
 
 model.update_settings = function(data)
@@ -14,6 +16,20 @@ end
 
 model.get_scale = function()
     return global.arrowlib.arrow_settings.ARROW_SCALE
+end
+
+model.get_sprite = function()
+    if not global.arrowlib.arrow_settings.ARROW_SPRITE then
+        global.arrowlib.arrow_settings.ARROW_SPRITE = const.arrow.SPRITE
+    end
+    return global.arrowlib.arrow_settings.ARROW_SPRITE
+end
+
+model.get_arrow_color = function()
+    if not global.arrowlib.arrow_settings.ARROW_SPRITE_COLOR then
+        global.arrowlib.arrow_settings.ARROW_SPRITE_COLOR = const.arrow.SPRITE_COLOR
+    end
+    return global.arrowlib.arrow_settings.ARROW_SPRITE_COLOR
 end
 
 model.store = function(id, data, prop, arrow_id, box_id)

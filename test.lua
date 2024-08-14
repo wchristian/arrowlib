@@ -75,6 +75,41 @@ local function absolute_to_world_origin(arrow, persistent)
     game.print("Test " .. debug.getinfo(1, "n").name .. " passed")
 end
 
+local function all_sprites_lined_up_absolute(arrow, persistent)
+    local x = 1
+    for _, arr in pairs(const.defines.arrow) do
+        local y = 1
+        for _, col in pairs(const.defines.color) do
+            local pos = {x * 2, y * 2}
+            local data = {
+                sprite = arr,
+                arrow_color = col,
+                source_direction = const.defines.source_direction.from_bottom,
+                target = pos,
+                surface = 1,
+                offset = 1
+            }
+            local result = arrow.create(data)
+
+            -- Check if an arrow was succesfully created
+            assert(result)
+
+            if not persistent then
+                -- Remove the arrow
+                local removed = arrow.remove(result)
+
+                -- Check if an arrow was succesfully removed
+                assert(removed)
+            end
+            y = y + 1
+        end
+
+        x = x + 1
+    end
+
+    game.print("Test " .. debug.getinfo(1, "n").name .. " passed")
+end
+
 local function get_character()
     -- Get any player character
     local player
@@ -121,6 +156,7 @@ test.run_all = function(arrow, persistent)
 
     -- Tests without character
     absolute_to_world_origin(arrow, persistent)
+    all_sprites_lined_up_absolute(arrow, persistent)
 
     -- Tests finished
     game.print("=== Tests complete ===")

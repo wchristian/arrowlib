@@ -127,29 +127,13 @@ arrow.get_distance = function(id)
     return controller.get_distance(id)
 end
 
+arrow.update_settings = function(data)
+    controller.set_data(data)
+end
+
 arrow.init = function(data)
-    -- Initialize global array
-    if not global.arrowlib then
-        global.arrowlib = {
-            arrows = {},
-            arrow_settings = {}
-        }
-    end
-
-    -- Set global lib settings
-    if not data then
-        data = {}
-    end
-    local globset = global.arrowlib.arrow_settings
-    globset.ARROW_TIME_TO_LIVE = (data.time_to_live or const.arrow.TIME_TO_LIVE)
-    globset.ARROW_OFFSET = (data.offset or const.arrow.OFFSET)
-    globset.ARROW_SCALE = (data.scale or const.arrow.SCALE)
-    globset.ARROW_FORCES = (data.forces or nil)
-    globset.ARROW_PLAYERS = (data.players or nil)
-    globset.UPDATES_PER_TICK = (data.updates_per_tick or const.settings.UPDATES_PER_TICK)
-    globset.RAISE_ERRORS = (data.raise_errors or const.settings.RAISE_ERRORS)
-    globset.RAISE_WARNINGS = (data.raise_warnings or const.settings.RAISE_WARNINGS)
-
+    controller.init()
+    controller.set_data(data)
 end
 
 return arrow

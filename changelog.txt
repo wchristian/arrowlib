@@ -1,4 +1,16 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.1.3
+Date: 2024-08-14
+  Features:
+    - Added function arrow.update_settings(data)
+  Bugfixes:
+    - Corrected processing of per-arrow sprite
+---------------------------------------------------------------------------------------------------
+Version: 0.1.2
+Date: 2024-08-13
+  Bugfixes:
+    - Fixes crash when checking for valid sprite while no argument was passed
+---------------------------------------------------------------------------------------------------
 Version: 0.1.1
 Date: 2024-08-13
   Features:

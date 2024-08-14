@@ -7,6 +7,14 @@ local view = require("__arrowlib__/scripts/view")
 
 local controller = {}
 
+local get_valid_arrow_sprite = function(sprite)
+    if not sprite or not game.is_valid_sprite_path(sprite) then
+        return model.get_sprite()
+    else
+        return sprite
+    end
+end
+
 local get_pt = function(from, to)
     local from_norm = position.get_normalized(from)
     local to_norm = position.get_normalized(to)
@@ -92,7 +100,9 @@ local calculate_prop = function(data)
         prop.surface = game.get_surface(srf)
     end
     prop.time_to_live = data.time_to_live or model.get_time_to_live()
-    prop.scale = data.scale or model.get_scale() -- TODO: Implement
+    prop.scale = data.scale or model.get_scale()
+    prop.sprite = get_valid_arrow_sprite(data.arrow_sprite)
+    prop.color = data.arrow_color or model.get_arrow_color()
 
     if prop.type == const.types.relative_from_entity then
         prop.target = data.source
@@ -163,6 +173,34 @@ controller.tick_update = function()
         v.prop = calculate_prop(v.data)
         view.update(v)
     end
+end
+
+controller.init = function()
+    -- Initialize global array
+    if not global.arrowlib then
+        global.arrowlib = {
+            arrows = {},
+            arrow_settings = {}
+        }
+    end
+end
+
+controller.set_data = function(data)
+    -- Set global lib settings
+    if not data then
+        data = {}
+    end
+    local globset = global.arrowlib.arrow_settings
+    globset.ARROW_SPRITE = (data.arrow_sprite or globset.ARROW_SPRITE or const.arrow.SPRITE)
+    globset.ARROW_SPRITE_COLOR = (data.arrow_color or globset.ARROW_SPRITE_COLOR or const.arrow.SPRITE_COLOR)
+    globset.ARROW_TIME_TO_LIVE = (data.time_to_live or globset.ARROW_TIME_TO_LIVE or const.arrow.TIME_TO_LIVE)
+    globset.ARROW_OFFSET = (data.offset or globset.ARROW_OFFSET or const.arrow.OFFSET)
+    globset.ARROW_SCALE = (data.scale or globset.ARROW_SCALE or const.arrow.SCALE)
+    globset.ARROW_FORCES = (data.forces or globset.ARROW_FORCES or nil)
+    globset.ARROW_PLAYERS = (data.players or globset.ARROW_PLAYERS or nil)
+    globset.UPDATES_PER_TICK = (data.updates_per_tick or globset.UPDATES_PER_TICK or const.settings.UPDATES_PER_TICK)
+    globset.RAISE_ERRORS = (data.raise_errors or globset.RAISE_ERRORS or const.settings.RAISE_ERRORS)
+    globset.RAISE_WARNINGS = (data.raise_warnings or globset.RAISE_WARNINGS or const.settings.RAISE_WARNINGS)
 end
 
 return controller
