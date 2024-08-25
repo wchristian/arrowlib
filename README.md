@@ -8,19 +8,25 @@ The Arrow Library is a simple yet stable and versatile interface to draw arrows 
 
 _While this library is still under development, released versions are tested and stable._
 
-**Roadmap**
+# How to use
+
+Add `arrowlib` as a required dependency in your _info.json_ and import the arrow class using `local arrow = require("__arrowlib__/arrow")`.
+
+Head over to the [Wiki on Github](https://github.com/Subject-314159/arrowlib/wiki) for the complete description how to use this library.
+
+---
+
+# Known issues
+
+-   None, feel free to open a bug report
+
+# Roadmap
 
 -   Spaced tick update when tracking large amounts of arrows
 -   Grouping arrows when multiple entities are within the same direction
 -   Add min/max distance threshold for drawing arrows
 -   Add function to update global settings after initialization
 -   Implement new parameters for existing functions
-
-# How to use
-
-Add `arrowlib` as a required dependency in your _info.json_ and import the arrow class using `local arrow = require("__arrowlib__/arrow")`.
-
-Head over to the [Wiki on Github](https://github.com/Subject-314159/arrowlib/wiki) for the complete description how to use this library.
 
 # Collaborations welcome
 
