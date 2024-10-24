@@ -24,7 +24,7 @@ local error_if = function(msg)
     log_trace(msg)
 
     -- Throw in game error if set
-    if global.arrowlib.arrow_settings.RAISE_ERRORS then
+    if storage.arrowlib.arrow_settings.RAISE_ERRORS then
         error(msg)
     end
 end
@@ -35,7 +35,7 @@ local warning_if = function(msg)
     log_trace(msg)
 
     -- Throw in game error if set
-    if global.arrowlib.arrow_settings.RAISE_WARNINGS then
+    if storage.arrowlib.arrow_settings.RAISE_WARNINGS then
         error(msg)
     end
 end
@@ -67,12 +67,12 @@ arrow.create = function(data)
         return
     end
     if data.source and not position.is_valid(data.source) then
-
+        position.is_valid(data.source)
         error_if("Parameter `source` does not contain a valid position")
         return
     end
-    if not position.is_valid(data.target) then
-
+    if data.source and not position.is_valid(data.source) then
+        position.is_valid(data.target)
         error_if("Parameter `target` does not contain a valid position")
         return
     end

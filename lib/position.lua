@@ -21,7 +21,7 @@ local is_bounding_box = function(target)
     if not target then
         return false
     end
-    local is_shorthand = (#target == 2 and type(target[1] == "table") and type(target[2] == "table")) or false
+    local is_shorthand = (#target == 2 and type(target[1] == "userdata") and type(target[2] == "userdata")) or false
     if is_shorthand then
         is_shorthand = is_map_position(target[1]) and is_map_position(target[2])
     end
@@ -115,8 +115,8 @@ end
 --- @param target any
 --- @return boolean
 position.is_valid = function(target)
-    -- Check if target is a table
-    if not target or type(target) ~= "table" then
+    -- Check if target is a userdata
+    if not target or type(target) ~= "userdata" then
         return false
     end
 

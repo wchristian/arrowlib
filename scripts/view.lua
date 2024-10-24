@@ -45,7 +45,7 @@ view.draw = function(prop)
     local arg = get_arg(prop)
 
     -- Draw & remember the arrow
-    local id = rendering.draw_sprite(arg)
+    local id = rendering.draw_sprite(arg).id
 
     -- Compose the id and return
     local idx
@@ -58,15 +58,17 @@ view.draw = function(prop)
 end
 
 view.destroy = function(id)
-    if id and rendering.is_valid(id) then
-        rendering.destroy(id)
+    if id and rendering.get_object_by_id(id).valid then
+        rendering.get_object_by_id(id).destroy()
     end
 end
 
 view.update = function(mstr)
     local arg = get_arg(mstr.prop)
-    rendering.set_target(mstr.arrow_id, arg.target, arg.target_offset or {0, 0})
-    rendering.set_orientation(mstr.arrow_id, arg.orientation)
+    local render = rendering.get_object_by_id(mstr.arrow_id)
+    render.target = {entity = arg.target, offset = arg.target_offset or {0, 0}}
+    render.orientation = 0.5
+    render.orientation_target = arg.target
 
 end
 

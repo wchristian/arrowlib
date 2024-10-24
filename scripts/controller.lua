@@ -8,7 +8,7 @@ local view = require("__arrowlib__/scripts/view")
 local controller = {}
 
 local get_valid_arrow_sprite = function(sprite)
-    if not sprite or not game.is_valid_sprite_path(sprite) then
+    if not sprite or not helpers.is_valid_sprite_path(sprite) then
         return model.get_sprite()
     else
         return sprite
@@ -94,7 +94,7 @@ local calculate_prop = function(data)
 
     -- Add generic info to prop
     local srf = data.surface or data.target.surface or data.source.surface -- TODO: data.surface should only be used if not data.source
-    if type(srf) == "table" then
+    if type(srf) == "userdata" then
         prop.surface = srf
     else
         prop.surface = game.get_surface(srf)
@@ -176,9 +176,9 @@ controller.tick_update = function()
 end
 
 controller.init = function()
-    -- Initialize global array
-    if not global.arrowlib then
-        global.arrowlib = {
+    -- Initialize storage array
+    if not storage.arrowlib then
+        storage.arrowlib = {
             arrows = {},
             arrow_settings = {}
         }
@@ -186,11 +186,11 @@ controller.init = function()
 end
 
 controller.set_data = function(data)
-    -- Set global lib settings
+    -- Set storage lib settings
     if not data then
         data = {}
     end
-    local globset = global.arrowlib.arrow_settings
+    local globset = storage.arrowlib.arrow_settings
     globset.ARROW_SPRITE = (data.arrow_sprite or globset.ARROW_SPRITE or const.arrow.SPRITE)
     globset.ARROW_SPRITE_COLOR = (data.arrow_color or globset.ARROW_SPRITE_COLOR or const.arrow.SPRITE_COLOR)
     globset.ARROW_TIME_TO_LIVE = (data.time_to_live or globset.ARROW_TIME_TO_LIVE or const.arrow.TIME_TO_LIVE)
